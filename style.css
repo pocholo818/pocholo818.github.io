@@ -1,0 +1,187 @@
+/*General*/
+body{
+    font-family: Segoe Print;
+    color: white;
+
+    background-image: url('images/wallpaper/white_simple.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+body h1{
+  font-size: 2vw;
+}
+
+body h2{
+  font-size: 1.5vw;
+}
+
+.center{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text{
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.navBar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-size: 1.8vw;
+    width: 100%;
+    /*
+    position: fixed;
+    top: 0;
+    left: 0;
+    */
+  }
+  
+.navBar li {
+    float: left;
+  }
+  
+.navBar li a {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+.navBar li a:hover {
+    background-color: #111;
+    transition: .5s;
+  }
+  
+  .active {
+    background-color: #111;
+    font-weight: bold;
+  }
+
+  /*Index Page*/
+  .me{
+    width: 25%;
+    height: 25%;
+    /*
+    padding-top: 5%;
+    padding-left: 15%;
+    */
+    margin-left: 15%;
+    margin-top: 5%;
+    border-color: #333 #e7dfdf;
+    border-image: none;
+    border-radius: 0 0 0 0;
+    border-style: solid;
+    border-width: 2vw;
+  }
+
+  .homeInfo{
+    font-size: 1.5vw;
+    color: white;
+    text-align: center;
+    font-family: Segoe Print;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    line-height: 70%;
+    float: right;
+    padding-top: 11%;
+    padding-right: 22%;
+  }
+
+  /*Contact Page*/
+  .contactContents h1{
+    font-size: 2vw;
+  }
+
+  .contactContents a{
+    padding: .4vw;
+    text-decoration: none;
+    color: white;
+  }
+
+  .contactContents a:hover{
+    background-color: #333;
+    transition: .5s;
+  }
+
+  .contactContents p{
+    font-size: 1.3vw;
+  }
+
+  /*Portfolio Page*/
+  .gallery{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .gallery img{
+    height: 25vh;
+    max-width: 100%;
+    box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+  }
+
+  .gallery a{
+    margin: .4vw;
+    line-height: 0;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+  }
+
+  .gallery p{
+    padding: .5vw;
+  }
+
+  /*Works Template*/
+  .template{
+    margin: 5vw;
+  }
+
+  .template img{
+    /*
+    width: 50%;
+    max-height: 720px;
+    */
+    height: 50vh;
+    max-width: 100%;
+    padding: 1vw;
+  }
+
+  .template h3{
+    font-size: 1.5vw;
+  }
+    
+  .template p{
+    font-size: 1vw;
+  }
+
+
+  /*sem hrs*/
+  .semHrs{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .semHrs img{
+    height: 50vh;
+    max-width: 100%;
+    padding: 1vw;
+  }
+
+  .semHrsText h3{
+    font-size: 1.5vw;
+  }
+
+  .semHrsText p{
+    font-size: 1vw;
+  }

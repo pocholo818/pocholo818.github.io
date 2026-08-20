@@ -375,7 +375,9 @@
   .lang-vue{ background: #42b883; }
   .proj-main{ flex: 1; min-width: 0; }
   .proj-name{ font-family: var(--mono); font-weight: 600; font-size: 0.98rem; }
-  .proj-desc{ color: var(--text-dim); font-size: 0.88rem; margin-top: 3px; }
+  .proj-role{ font-family: var(--mono); font-size: 0.72rem; color: var(--teal); margin-top: 3px; }
+  .proj-role::before{ content: "role: "; color: var(--text-dim); }
+  .proj-desc{ color: var(--text-dim); font-size: 0.88rem; margin-top: 5px; }
   .proj-tags{
     display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; max-width: 220px;
   }
@@ -566,17 +568,6 @@
     </div>
 
     <div class="log-entry reveal">
-      <div class="log-meta"><span class="hash">#7e02b4</span>2026</div>
-      <div>
-        <div class="log-role">Web Developer</div>
-        <div class="log-org">Logic Lyric Solutions</div>
-        <ul>
-          <li>Digital agency work spanning custom web design, front-end and back-end development, mobile-first builds, and performance optimization for small-to-medium businesses</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="log-entry reveal">
       <div class="log-meta"><span class="hash">#4c81aa</span>Mar 2023 — May 2023</div>
       <div>
         <div class="log-role">Web Developer — Intern</div>
@@ -595,7 +586,21 @@
       <div class="proj-row">
         <span class="lang-dot lang-vue"></span>
         <div class="proj-main">
+          <div class="proj-name">exergo</div>
+          <div class="proj-role">web developer</div>
+          <div class="proj-desc">Digital agency work spanning custom web design, front-end and back-end development, mobile-first builds, and performance optimization for small-to-medium businesses</div>
+        </div>
+        <div class="proj-tags">
+          <span class="tag">Ionic Vue</span>
+          <span class="tag">UI/UX</span>
+        </div>
+        <div class="proj-date">Jun 2026</div>
+      </div>
+      <div class="proj-row">
+        <span class="lang-dot lang-vue"></span>
+        <div class="proj-main">
           <div class="proj-name">bocfp</div>
+          <div class="proj-role">full-stack developer</div>
           <div class="proj-desc">Web-based BMI monitoring system for the children of Barangay Old Cabalan</div>
         </div>
         <div class="proj-tags">
@@ -608,6 +613,7 @@
         <span class="lang-dot lang-php"></span>
         <div class="proj-main">
           <div class="proj-name">triple-w-inventory-system</div>
+          <div class="proj-role">back-end developer</div>
           <div class="proj-desc">PHP inventory system for managing stock at Triple W Machine Works</div>
         </div>
         <div class="proj-tags">
@@ -620,6 +626,7 @@
         <span class="lang-dot lang-java"></span>
         <div class="proj-main">
           <div class="proj-name">powerskills-attendance-system</div>
+          <div class="proj-role">back-end developer</div>
           <div class="proj-desc">Attendance monitoring system for Power Skills Technical Institute of Zambales</div>
         </div>
         <div class="proj-tags">

@@ -1,29 +1,193 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Home</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" href="images/icons/role-model.png">
-    </head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pocholo L. Gopez — PHP and Laravel Web Developer portfolio.">
+  <title>Pocholo Gopez | PHP / Laravel Developer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="#home">PG<span>.</span></a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-    <body>
-        <div class="navBar">
-                <ul>
-                    <li><a href="index.html" class="active">About Me</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="semHrs.html">Seminar Hours</a></li>
-                    <li><a href="contacts.html">Contacts</a></li>
-                </ul>
+  <main>
+    <section id="home" class="hero container">
+      <div class="hero-copy">
+        <p class="eyebrow">PHP • Laravel • Web Development</p>
+        <h1>Building web applications that are <span>efficient, secure, and readable.</span></h1>
+        <p class="hero-text">
+          I'm Pocholo Gopez, a Web Developer focused on backend logic, full-stack web development,
+          APIs, and database management.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#projects">View my work</a>
+          <a class="button secondary" href="mailto:pochologopez2000@gmail.com">Let's connect</a>
         </div>
-
-        <div class="homeInfo">
-            <h1>Hello!</h1>
-            <h2>I am Pocholo L. Gopez</h2>
-            <p>An aspiring Back-end Developer</p>
-            <p>Currently Studying BSIT</p>
+      </div>
+      <div class="hero-card">
+        <div class="code-window">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <pre><code><span class="muted">// my approach</span>
+<span class="keyword">function</span> <span class="fn">build</span>(solution) {
+  <span class="keyword">return</span> solution
+    .<span class="fn">efficient</span>()
+    .<span class="fn">secure</span>()
+    .<span class="fn">readable</span>();
+}</code></pre>
         </div>
+      </div>
+    </section>
 
-        <img src="images/Me/me.jpg" alt="me" class="me">
+    <section id="about" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">01 — About</p>
+        <h2>A developer who cares about what happens behind the interface.</h2>
+      </div>
+      <div class="about-grid">
+        <p>
+          I'm a versatile developer with experience in full-stack web development, backend logic,
+          and database management. My main focus is PHP and Laravel, while also working with
+          JavaScript, Vue/Ionic, MySQL, Bootstrap, and APIs.
+        </p>
+        <p>
+          I enjoy solving problems, improving existing applications, and working with teams to
+          turn requirements into practical and maintainable software.
+        </p>
+      </div>
+    </section>
 
-    </body>
+    <section id="work" class="section section-alt">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">02 — How I Work</p>
+          <h2>Three things I try to bring to every project.</h2>
+        </div>
+        <div class="principles">
+          <article class="principle">
+            <span class="number">01</span>
+            <h3>Efficient</h3>
+            <p>I look for practical solutions that perform well, avoid unnecessary complexity, and make good use of system resources.</p>
+          </article>
+          <article class="principle">
+            <span class="number">02</span>
+            <h3>Secure</h3>
+            <p>I keep security in mind across application logic, APIs, database operations, version control, and deployment.</p>
+          </article>
+          <article class="principle">
+            <span class="number">03</span>
+            <h3>Readable</h3>
+            <p>I aim for clean, understandable code that is easier to maintain, debug, extend, and hand over to another developer.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">03 — Skills</p>
+        <h2>Tools I work with.</h2>
+      </div>
+      <div class="skills">
+        <span>PHP</span><span>Laravel</span><span>MySQL</span><span>HTML</span><span>CSS</span>
+        <span>JavaScript</span><span>jQuery</span><span>Bootstrap</span><span>Vue / Ionic</span>
+        <span>Python</span><span>Java</span><span>REST APIs</span><span>Postman</span>
+        <span>Git</span><span>Git Bash</span><span>Jira</span>
+      </div>
+    </section>
+
+    <section id="experience" class="section section-alt">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">04 — Experience</p>
+          <h2>Where I've worked.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-date">Jun 2023 — Present</div>
+            <div>
+              <h3>Web Developer</h3>
+              <p class="company">Pilipinas Micro-Matrix Technology</p>
+              <ul>
+                <li>Developed and maintained web applications using Laravel.</li>
+                <li>Focused on performance, efficiency, maintainability, and readable code.</li>
+                <li>Developed and integrated REST APIs and tested them using Postman.</li>
+                <li>Managed MySQL databases and worked on queries, data management, and optimization.</li>
+                <li>Used Git, Git Bash, SSH, and Jira for development and deployment workflows.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">Mar 2023 — May 2023</div>
+            <div>
+              <h3>Web Developer Intern</h3>
+              <p class="company">Pilipinas Micro-Matrix Technology</p>
+              <ul>
+                <li>Developed and maintained web application features using Laravel.</li>
+                <li>Gained hands-on experience with PHP, MVC architecture, database integration, and backend development.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">05 — Projects</p>
+        <h2>A few things I've built.</h2>
+      </div>
+      <div class="projects">
+        <article class="project">
+          <div class="project-top"><span>2022 — 2023</span><span>01</span></div>
+          <h3>BOCFP</h3>
+          <p>A web-based application for monitoring the BMI of children of the Barangay Old Cabalan feeding program.</p>
+          <div class="tags"><span>Ionic Vue</span><span>Backend</span><span>Database</span><span>UI/UX</span><span>Frontend</span></div>
+        </article>
+        <article class="project">
+          <div class="project-top"><span>2021 — 2022</span><span>02</span></div>
+          <h3>Triple W Inventory System</h3>
+          <p>A PHP web-based inventory system for managing the inventory of Triple W Machine Works.</p>
+          <div class="tags"><span>PHP</span><span>Backend</span><span>Database</span></div>
+        </article>
+        <article class="project">
+          <div class="project-top"><span>2020</span><span>03</span></div>
+          <h3>PowerSkills Attendance System</h3>
+          <p>An attendance monitoring system for Power Skills Technical Institute of Zambales Inc.</p>
+          <div class="tags"><span>Java</span><span>Backend</span><span>Database</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="container contact">
+        <p class="eyebrow">06 — Contact</p>
+        <h2>Have a project in mind?</h2>
+        <p>I'm open to opportunities, collaboration, and interesting web development projects.</p>
+        <a class="button primary" href="mailto:pochologopez2000@gmail.com">pochologopez2000@gmail.com</a>
+        <div class="socials">
+          <a href="https://github.com/pocholo818" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://linkedin.com/in/poch-gopez/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <span>© 2026 Pocholo Gopez</span>
+    <span>Built with HTML, CSS & JavaScript.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>

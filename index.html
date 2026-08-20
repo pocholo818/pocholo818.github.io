@@ -1,193 +1,749 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pocholo L. Gopez — PHP and Laravel Web Developer portfolio.">
-  <title>Pocholo Gopez | PHP / Laravel Developer</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pocholo Gopez — Full-Stack Web Developer</title>
+<meta name="description" content="Portfolio of Pocholo L. Gopez, a full-stack web developer working with Laravel, Vue Ionic, and MySQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12141c;
+    --bg-alt: #171a23;
+    --surface: #1d2029;
+    --surface-hi: #242833;
+    --border: #2b2f3b;
+    --text: #eceef2;
+    --text-dim: #8b93a7;
+    --amber: #f2b84b;
+    --amber-soft: rgba(242,184,75,0.14);
+    --teal: #52d4c4;
+    --teal-soft: rgba(82,212,196,0.14);
+    --red: #ff6b6b;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  ::selection{ background: var(--amber); color: #12141c; }
+
+  :focus-visible{
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(18,20,28,0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand{
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--amber);
+    letter-spacing: -0.02em;
+  }
+  .brand span{ color: var(--text-dim); }
+  .navlinks{
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+  .navlinks a{
+    position: relative;
+    padding: 2px 0;
+    transition: color 0.2s ease;
+  }
+  .navlinks a:hover{ color: var(--amber); }
+  .navlinks a::before{ content: "./"; color: var(--teal); opacity: 0.7; }
+  .nav-toggle{ display:none; }
+
+  @media (max-width: 640px){
+    .navlinks{ gap: 14px; font-size: 0.72rem; }
+  }
+
+  /* ---------- HERO / TERMINAL ---------- */
+  .hero{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 0 60px;
+    position: relative;
+  }
+
+  .terminal{
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+    position: relative;
+  }
+
+  .term-bar{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .dot{ width: 11px; height: 11px; border-radius: 50%; }
+  .dot.red{ background: #ff5f57; }
+  .dot.yellow{ background: #febc2e; }
+  .dot.green{ background: #28c840; }
+  .term-title{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-left: 10px;
+  }
+
+  .term-body{
+    padding: 30px 26px 38px;
+    font-family: var(--mono);
+    font-size: 1rem;
+    position: relative;
+    min-height: 220px;
+  }
+
+  /* scanline overlay, subtle */
+  .term-body::after{
+    content:"";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(242,184,75,0.025) 0px,
+      rgba(242,184,75,0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  .prompt-line{
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+  .prompt-line .path{ color: var(--amber); }
+  .prompt-line .cmd{ color: var(--text); }
+
+  #typed-cmd::after{
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 1.05em;
+    background: var(--amber);
+    vertical-align: -2px;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+  }
+  #typed-cmd.done::after{ animation: blink 1s step-end infinite; }
+
+  @keyframes blink{ 50%{ opacity: 0; } }
+
+  .term-output{
+    margin-top: 18px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .term-output.show{ opacity: 1; transform: translateY(0); }
+
+  .term-output h1{
+    font-family: var(--mono);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .term-output .role{
+    color: var(--amber);
+    font-size: 1rem;
+    margin-top: 6px;
+  }
+  .term-output .loc{
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: 10px;
+  }
+  .term-output .loc::before{ content: "→ "; color: var(--teal); }
+
+  .hero-sub{
+    max-width: 620px;
+    margin: 30px auto 0;
+    color: var(--text-dim);
+    font-size: 1rem;
+    text-align: center;
+  }
+  .hero-sub strong{ color: var(--text); font-weight: 500; }
+
+  /* ---------- SECTIONS GENERAL ---------- */
+  section{ padding: 90px 0; border-top: 1px solid var(--border); }
+  section:first-of-type{ border-top: none; }
+
+  .file-label{
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .file-label .tab{
+    color: var(--teal);
+  }
+  .file-label::before{ content: "◆"; color: var(--amber); font-size: 0.6rem; }
+
+  .reveal{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(.2,.7,.3,1), transform 0.7s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.visible{ opacity: 1; transform: translateY(0); }
+
+  h2.section-title{
+    font-family: var(--mono);
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  h2.section-title .dim{ color: var(--text-dim); font-weight: 400; }
+
+  /* ---------- ABOUT / code card ---------- */
+  .code-card{
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .gutter{
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: #454b5c;
+    padding: 22px 14px;
+    text-align: right;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    user-select: none;
+  }
+  .gutter div{ height: 1.65em; }
+  .code-content{
+    padding: 22px 24px;
+    font-size: 0.98rem;
+    color: var(--text-dim);
+  }
+  .code-content .kw{ color: var(--teal); font-family: var(--mono); }
+  .code-content .str{ color: var(--amber); }
+
+  /* ---------- HOW I WORK ---------- */
+  .work-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+  }
+  @media (max-width: 720px){ .work-grid{ grid-template-columns: 1fr; } }
+
+  .work-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .work-card:hover{
+    transform: translateY(-4px);
+    border-color: var(--amber-soft);
+    background: var(--surface-hi);
+  }
+  .work-check{
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .work-check::before{ content: "✓"; }
+  .work-card h3{
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .work-card p{ color: var(--text-dim); font-size: 0.92rem; }
+  .work-card code{
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    background: var(--bg);
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: var(--amber);
+  }
+
+  /* ---------- EXPERIENCE / log ---------- */
+  .log-entry{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .log-entry:last-child{ border-bottom: none; }
+  @media (max-width: 640px){
+    .log-entry{ grid-template-columns: 1fr; gap: 6px; }
+  }
+  .log-meta{
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+  .log-meta .hash{ color: var(--teal); display:block; margin-bottom: 4px; }
+  .log-role{ font-weight: 600; font-size: 1.02rem; margin-bottom: 2px; }
+  .log-org{ color: var(--amber); font-size: 0.92rem; margin-bottom: 10px; font-family: var(--mono); }
+  .log-entry ul{ list-style: none; color: var(--text-dim); font-size: 0.92rem; }
+  .log-entry ul li{ padding-left: 16px; position: relative; margin-bottom: 6px; }
+  .log-entry ul li::before{ content: "-"; position: absolute; left: 0; color: var(--teal); }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-list{ margin-top: 20px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .proj-row{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    transition: background 0.2s ease;
+  }
+  .proj-row:last-child{ border-bottom: none; }
+  .proj-row:hover{ background: var(--surface-hi); }
+  .lang-dot{ width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .lang-php{ background: #8892bf; }
+  .lang-java{ background: #f89820; }
+  .lang-vue{ background: #42b883; }
+  .proj-main{ flex: 1; min-width: 0; }
+  .proj-name{ font-family: var(--mono); font-weight: 600; font-size: 0.98rem; }
+  .proj-desc{ color: var(--text-dim); font-size: 0.88rem; margin-top: 3px; }
+  .proj-tags{
+    display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; max-width: 220px;
+  }
+  .tag{
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .proj-date{
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  @media (max-width: 640px){
+    .proj-row{ flex-wrap: wrap; }
+    .proj-tags{ justify-content: flex-start; max-width: none; }
+    .proj-date{ order: 3; }
+  }
+
+  /* ---------- SKILLS ---------- */
+  .json-block{
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 26px 28px;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+  .json-block .k{ color: var(--teal); }
+  .json-block .v{ color: var(--amber); }
+  .json-block .punc{ color: var(--text-dim); }
+  .skill-chip-row{ display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-chip{
+    display: inline-block;
+    color: var(--amber);
+    padding: 2px 4px;
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .edu-item:last-child{ border-bottom: none; }
+  .edu-name{ font-weight: 600; }
+  .edu-school{ color: var(--text-dim); font-size: 0.9rem; margin-top: 2px; }
+  .edu-date{ font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); white-space: nowrap; }
+  @media (max-width: 560px){
+    .edu-item{ flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-term{
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 26px 28px;
+    font-family: var(--mono);
+    font-size: 0.94rem;
+    margin-top: 20px;
+  }
+  .contact-line{ margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .contact-line:last-child{ margin-bottom: 0; }
+  .contact-line .sh{ color: var(--teal); }
+  .contact-line .flag{ color: var(--text-dim); }
+  .contact-line a{
+    color: var(--amber);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .contact-line a:hover{ border-color: var(--amber); }
+
+  footer{
+    padding: 40px 0 60px;
+    text-align: center;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+  }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav container">
-      <a class="brand" href="#home">PG<span>.</span></a>
-      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
-  </header>
 
-  <main>
-    <section id="home" class="hero container">
-      <div class="hero-copy">
-        <p class="eyebrow">PHP • Laravel • Web Development</p>
-        <h1>Building web applications that are <span>efficient, secure, and readable.</span></h1>
-        <p class="hero-text">
-          I'm Pocholo Gopez, a Web Developer focused on backend logic, full-stack web development,
-          APIs, and database management.
-        </p>
-        <div class="actions">
-          <a class="button primary" href="#projects">View my work</a>
-          <a class="button secondary" href="mailto:pochologopez2000@gmail.com">Let's connect</a>
+<header>
+  <nav>
+    <div class="brand">poch<span>@</span>dev<span>:~$</span></div>
+    <ul class="navlinks">
+      <li><a href="#about">about</a></li>
+      <li><a href="#work">how-i-work</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero wrap">
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="term-title">poch@dev — zsh</span>
+      </div>
+      <div class="term-body">
+        <div class="prompt-line"><span class="path">~</span> <span class="cmd">$ <span id="typed-cmd"></span></span></div>
+        <div class="term-output" id="term-output">
+          <h1>Pocholo L. Gopez</h1>
+          <div class="role">Full-Stack Web Developer — Laravel · Vue Ionic · MySQL</div>
+          <div class="loc">Gordon Heights, Olongapo City, Philippines</div>
         </div>
       </div>
-      <div class="hero-card">
-        <div class="code-window">
-          <div class="dots"><i></i><i></i><i></i></div>
-          <pre><code><span class="muted">// my approach</span>
-<span class="keyword">function</span> <span class="fn">build</span>(solution) {
-  <span class="keyword">return</span> solution
-    .<span class="fn">efficient</span>()
-    .<span class="fn">secure</span>()
-    .<span class="fn">readable</span>();
-}</code></pre>
+    </div>
+    <p class="hero-sub reveal" id="hero-sub">
+      I build web applications end to end — from database schema to UI — and I care most about
+      code that's <strong>efficient</strong>, <strong>secure</strong>, and <strong>readable</strong> long after I've moved on.
+    </p>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="file-label reveal"><span class="tab">profile.md</span></div>
+    <h2 class="section-title reveal">About</h2>
+    <div class="code-card reveal">
+      <div class="gutter"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+      <div class="code-content">
+        <span class="kw">&gt;</span> Versatile developer skilled in full-stack web development, backend logic,
+        and database management. I work mainly with <span class="str">Laravel</span> and <span class="str">Vue Ionic</span>,
+        combining sharp problem-solving with the discipline to execute projects
+        cleanly — on my own or as part of a team.
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="wrap">
+    <div class="file-label reveal"><span class="tab">how-i-work.sh</span></div>
+    <h2 class="section-title reveal">How I work</h2>
+    <div class="work-grid">
+      <div class="work-card reveal">
+        <div class="work-check">efficient</div>
+        <h3>Fast where it counts</h3>
+        <p>I optimize the paths that matter — tuned <code>MySQL</code> queries, lean API responses,
+        and workflows tracked in <code>Jira</code> so nothing gets built twice.</p>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-check">secure</div>
+        <h3>Careful by default</h3>
+        <p>Validated input, parameterized queries, and deploys over <code>SSH</code> —
+        security isn't a step I add later, it's part of how I write the first draft.</p>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-check">readable</div>
+        <h3>Built for the next dev</h3>
+        <p>Clear naming, small functions, and commits that explain themselves —
+        so the next person (often future me) can pick it up without a walkthrough.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="wrap">
+    <div class="file-label reveal"><span class="tab">experience.log</span></div>
+    <h2 class="section-title reveal">Experience</h2>
+
+    <div class="log-entry reveal">
+      <div class="log-meta"><span class="hash">#a1f3c9</span>Jun 2023 — Current</div>
+      <div>
+        <div class="log-role">Web Developer</div>
+        <div class="log-org">Pilipinas Micro-Matrix Technology</div>
+        <ul>
+          <li>Built and maintained web applications in Laravel, focused on performance and clean, maintainable code</li>
+          <li>Worked with developers, support, and management to ship features and resolve issues</li>
+          <li>Built and integrated REST APIs, testing and validating with Postman</li>
+          <li>Managed MySQL databases — queries, data management, optimization</li>
+          <li>Tracked progress in Jira; version-controlled and deployed via Git and Git Bash over SSH</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="log-entry reveal">
+      <div class="log-meta"><span class="hash">#7e02b4</span>2026</div>
+      <div>
+        <div class="log-role">Web Developer</div>
+        <div class="log-org">Logic Lyric Solutions</div>
+        <ul>
+          <li>Digital agency work spanning custom web design, front-end and back-end development, mobile-first builds, and performance optimization for small-to-medium businesses</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="log-entry reveal">
+      <div class="log-meta"><span class="hash">#4c81aa</span>Mar 2023 — May 2023</div>
+      <div>
+        <div class="log-role">Web Developer — Intern</div>
+        <div class="log-org">Pilipinas Micro-Matrix Technology</div>
+        <ul>
+          <li>Built and maintained features in Laravel, gaining hands-on experience with PHP, MVC architecture, and database integration</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="wrap">
+    <div class="file-label reveal"><span class="tab">projects/</span></div>
+    <h2 class="section-title reveal">Projects</h2>
+    <div class="proj-list reveal">
+      <div class="proj-row">
+        <span class="lang-dot lang-vue"></span>
+        <div class="proj-main">
+          <div class="proj-name">bocfp</div>
+          <div class="proj-desc">Web-based BMI monitoring system for the children of Barangay Old Cabalan</div>
         </div>
-      </div>
-    </section>
-
-    <section id="about" class="section container">
-      <div class="section-heading">
-        <p class="eyebrow">01 — About</p>
-        <h2>A developer who cares about what happens behind the interface.</h2>
-      </div>
-      <div class="about-grid">
-        <p>
-          I'm a versatile developer with experience in full-stack web development, backend logic,
-          and database management. My main focus is PHP and Laravel, while also working with
-          JavaScript, Vue/Ionic, MySQL, Bootstrap, and APIs.
-        </p>
-        <p>
-          I enjoy solving problems, improving existing applications, and working with teams to
-          turn requirements into practical and maintainable software.
-        </p>
-      </div>
-    </section>
-
-    <section id="work" class="section section-alt">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">02 — How I Work</p>
-          <h2>Three things I try to bring to every project.</h2>
+        <div class="proj-tags">
+          <span class="tag">Ionic Vue</span>
+          <span class="tag">UI/UX</span>
         </div>
-        <div class="principles">
-          <article class="principle">
-            <span class="number">01</span>
-            <h3>Efficient</h3>
-            <p>I look for practical solutions that perform well, avoid unnecessary complexity, and make good use of system resources.</p>
-          </article>
-          <article class="principle">
-            <span class="number">02</span>
-            <h3>Secure</h3>
-            <p>I keep security in mind across application logic, APIs, database operations, version control, and deployment.</p>
-          </article>
-          <article class="principle">
-            <span class="number">03</span>
-            <h3>Readable</h3>
-            <p>I aim for clean, understandable code that is easier to maintain, debug, extend, and hand over to another developer.</p>
-          </article>
+        <div class="proj-date">2022–2023</div>
+      </div>
+      <div class="proj-row">
+        <span class="lang-dot lang-php"></span>
+        <div class="proj-main">
+          <div class="proj-name">triple-w-inventory-system</div>
+          <div class="proj-desc">PHP inventory system for managing stock at Triple W Machine Works</div>
         </div>
-      </div>
-    </section>
-
-    <section id="skills" class="section container">
-      <div class="section-heading">
-        <p class="eyebrow">03 — Skills</p>
-        <h2>Tools I work with.</h2>
-      </div>
-      <div class="skills">
-        <span>PHP</span><span>Laravel</span><span>MySQL</span><span>HTML</span><span>CSS</span>
-        <span>JavaScript</span><span>jQuery</span><span>Bootstrap</span><span>Vue / Ionic</span>
-        <span>Python</span><span>Java</span><span>REST APIs</span><span>Postman</span>
-        <span>Git</span><span>Git Bash</span><span>Jira</span>
-      </div>
-    </section>
-
-    <section id="experience" class="section section-alt">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">04 — Experience</p>
-          <h2>Where I've worked.</h2>
+        <div class="proj-tags">
+          <span class="tag">PHP</span>
+          <span class="tag">MySQL</span>
         </div>
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-date">Jun 2023 — Present</div>
-            <div>
-              <h3>Web Developer</h3>
-              <p class="company">Pilipinas Micro-Matrix Technology</p>
-              <ul>
-                <li>Developed and maintained web applications using Laravel.</li>
-                <li>Focused on performance, efficiency, maintainability, and readable code.</li>
-                <li>Developed and integrated REST APIs and tested them using Postman.</li>
-                <li>Managed MySQL databases and worked on queries, data management, and optimization.</li>
-                <li>Used Git, Git Bash, SSH, and Jira for development and deployment workflows.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="timeline-item">
-            <div class="timeline-date">Mar 2023 — May 2023</div>
-            <div>
-              <h3>Web Developer Intern</h3>
-              <p class="company">Pilipinas Micro-Matrix Technology</p>
-              <ul>
-                <li>Developed and maintained web application features using Laravel.</li>
-                <li>Gained hands-on experience with PHP, MVC architecture, database integration, and backend development.</li>
-              </ul>
-            </div>
-          </article>
+        <div class="proj-date">2021–2022</div>
+      </div>
+      <div class="proj-row">
+        <span class="lang-dot lang-java"></span>
+        <div class="proj-main">
+          <div class="proj-name">powerskills-attendance-system</div>
+          <div class="proj-desc">Attendance monitoring system for Power Skills Technical Institute of Zambales</div>
         </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section container">
-      <div class="section-heading">
-        <p class="eyebrow">05 — Projects</p>
-        <h2>A few things I've built.</h2>
-      </div>
-      <div class="projects">
-        <article class="project">
-          <div class="project-top"><span>2022 — 2023</span><span>01</span></div>
-          <h3>BOCFP</h3>
-          <p>A web-based application for monitoring the BMI of children of the Barangay Old Cabalan feeding program.</p>
-          <div class="tags"><span>Ionic Vue</span><span>Backend</span><span>Database</span><span>UI/UX</span><span>Frontend</span></div>
-        </article>
-        <article class="project">
-          <div class="project-top"><span>2021 — 2022</span><span>02</span></div>
-          <h3>Triple W Inventory System</h3>
-          <p>A PHP web-based inventory system for managing the inventory of Triple W Machine Works.</p>
-          <div class="tags"><span>PHP</span><span>Backend</span><span>Database</span></div>
-        </article>
-        <article class="project">
-          <div class="project-top"><span>2020</span><span>03</span></div>
-          <h3>PowerSkills Attendance System</h3>
-          <p>An attendance monitoring system for Power Skills Technical Institute of Zambales Inc.</p>
-          <div class="tags"><span>Java</span><span>Backend</span><span>Database</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" class="contact-section">
-      <div class="container contact">
-        <p class="eyebrow">06 — Contact</p>
-        <h2>Have a project in mind?</h2>
-        <p>I'm open to opportunities, collaboration, and interesting web development projects.</p>
-        <a class="button primary" href="mailto:pochologopez2000@gmail.com">pochologopez2000@gmail.com</a>
-        <div class="socials">
-          <a href="https://github.com/pocholo818" target="_blank" rel="noopener">GitHub ↗</a>
-          <a href="https://linkedin.com/in/poch-gopez/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <div class="proj-tags">
+          <span class="tag">Java</span>
+          <span class="tag">MySQL</span>
         </div>
+        <div class="proj-date">2020</div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer class="footer container">
-    <span>© 2026 Pocholo Gopez</span>
-    <span>Built with HTML, CSS & JavaScript.</span>
-  </footer>
+  <section id="skills" class="wrap">
+    <div class="file-label reveal"><span class="tab">skills.json</span></div>
+    <h2 class="section-title reveal">Skills</h2>
+    <div class="json-block reveal">
+      <span class="punc">{</span><br>
+      &nbsp;&nbsp;<span class="k">"languages"</span><span class="punc">:</span> [<span class="v">"PHP"</span>, <span class="v">"JavaScript"</span>, <span class="v">"Python"</span>, <span class="v">"Java"</span>]<span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"frameworks"</span><span class="punc">:</span> [<span class="v">"Laravel"</span>, <span class="v">"Ionic Vue"</span>, <span class="v">"Bootstrap"</span>, <span class="v">"jQuery"</span>]<span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"web"</span><span class="punc">:</span> [<span class="v">"HTML"</span>, <span class="v">"CSS"</span>]<span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"database"</span><span class="punc">:</span> [<span class="v">"MySQL"</span>]<span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"tooling"</span><span class="punc">:</span> [<span class="v">"Git"</span>, <span class="v">"Git Bash"</span>, <span class="v">"SSH"</span>, <span class="v">"Postman"</span>, <span class="v">"Jira"</span>]<br>
+      <span class="punc">}</span>
+    </div>
+  </section>
 
-  <script src="script.js"></script>
+  <section id="education" class="wrap">
+    <div class="file-label reveal"><span class="tab">education.txt</span></div>
+    <h2 class="section-title reveal">Education</h2>
+    <div class="reveal">
+      <div class="edu-item">
+        <div>
+          <div class="edu-name">BS in Information Technology</div>
+          <div class="edu-school">Gordon College, Olongapo City</div>
+        </div>
+        <div class="edu-date">2019 – 2023</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-name">Senior High School — ICT</div>
+          <div class="edu-school">St. Joseph College, Olongapo City</div>
+        </div>
+        <div class="edu-date">2017 – 2019</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <div class="file-label reveal"><span class="tab">contact.sh</span></div>
+    <h2 class="section-title reveal">Get in touch</h2>
+    <div class="contact-term reveal">
+      <div class="contact-line">
+        <span class="sh">$</span> <span class="flag">./reach.sh --email</span>
+        <a href="mailto:pochologopez2000@gmail.com">pochologopez2000@gmail.com</a>
+      </div>
+      <div class="contact-line">
+        <span class="sh">$</span> <span class="flag">./reach.sh --phone</span>
+        <a href="tel:+639454123288">+63 945 412 3288</a>
+      </div>
+      <div class="contact-line">
+        <span class="sh">$</span> <span class="flag">./reach.sh --github</span>
+        <a href="https://github.com/pocholo818" target="_blank" rel="noopener">github.com/pocholo818</a>
+      </div>
+      <div class="contact-line">
+        <span class="sh">$</span> <span class="flag">./reach.sh --linkedin</span>
+        <a href="https://linkedin.com/in/poch-gopez/" target="_blank" rel="noopener">linkedin.com/in/poch-gopez</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Pocholo L. Gopez — built with plain HTML, CSS, and a bit of JS.</div>
+</footer>
+
+<script>
+  // Typing effect for the hero terminal command
+  (function(){
+    var el = document.getElementById('typed-cmd');
+    var output = document.getElementById('term-output');
+    var heroSub = document.getElementById('hero-sub');
+    var text = 'whoami';
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function reveal(){
+      output.classList.add('show');
+      heroSub.classList.add('visible');
+    }
+
+    if(reduced){
+      el.textContent = text;
+      reveal();
+    } else {
+      var i = 0;
+      (function type(){
+        if(i <= text.length){
+          el.textContent = text.slice(0, i);
+          i++;
+          setTimeout(type, 110);
+        } else {
+          setTimeout(reveal, 250);
+        }
+      })();
+    }
+  })();
+
+  // Scroll reveal
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
 </body>
 </html>
